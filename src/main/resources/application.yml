@@ -1,0 +1,20 @@
+server:
+  port:
+spring:
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:h2db
+    driver-class-name: org.h2.Driver
+    username: ken
+    password: 
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    
+    thymeleaf:
+      prefix: classpath:/templates/
+      check-template-location: true
+      suffix: .html
+      encoding: utf-8
+      cache: false
