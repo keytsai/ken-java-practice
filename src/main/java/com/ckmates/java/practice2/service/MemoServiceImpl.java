@@ -5,13 +5,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.ckmates.java.practice2.model.Memo;
 import com.ckmates.java.practice2.model.MemoImpl;
 import com.ckmates.java.practice2.repository.MemoRepository;
 
+@Service
+@Transactional
 public class MemoServiceImpl implements MemoService {
 
-//	@Autowired
+	@Autowired
 	private MemoRepository memoRepository;
 
 	@Override
@@ -21,7 +27,6 @@ public class MemoServiceImpl implements MemoService {
 
 	@Override
 	public Memo save(MemoImpl memoImpl) {
-//		memoImpl.setTimestamp(LocalDateTime.now());
 		return memoRepository.save(memoImpl);
 	}
 
