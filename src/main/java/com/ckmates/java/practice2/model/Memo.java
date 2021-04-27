@@ -16,7 +16,9 @@
 package com.ckmates.java.practice2.model;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+
+//import java.time.LocalDateTime;
+//import java.util.Set;
 
 public interface Memo {
 
@@ -26,8 +28,8 @@ public interface Memo {
 
   LocalDateTime getTimestamp();
 
-  Set<String> getLabels();
+//  Set<String> getLabels();
 
-  boolean isArchived();
+//  boolean isArchived();
 
 }

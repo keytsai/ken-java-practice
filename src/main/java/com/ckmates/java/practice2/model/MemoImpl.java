@@ -1,21 +1,18 @@
 package com.ckmates.java.practice2.model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class MemoImpl {
+public class MemoImpl implements Memo{
 	
 	public MemoImpl() {}
 	
-	public MemoImpl(String title, String text, String label, int archived) {
-		this.title = title;
-		this.text = text;
-		this.label = label;
-		this.archived = archived;
-	}
+	
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
@@ -23,10 +20,19 @@ public class MemoImpl {
 	
 	private String title;
 	private String text;
+	private LocalDateTime timestamp;
 	private String label;
 	private int archived;
 	
 	
+	public LocalDateTime getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(LocalDateTime timestamp) {
+		this.timestamp = timestamp;
+	}
+
 	public Long getId() {
 		return id;
 	}
