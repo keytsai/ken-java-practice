@@ -16,7 +16,6 @@ import com.ckmates.java.practice2.model.Memo;
 import com.ckmates.java.practice2.model.MemoImpl;
 import com.ckmates.java.practice2.service.MemoService;
 
-
 @Controller
 public class MemoController {
 
@@ -31,12 +30,6 @@ public class MemoController {
         return "memo-index";
     }
 
-    @PostMapping(value = "/memo")
-    public String save(@ModelAttribute MemoImpl memoImpl) {
-        memoService.save(memoImpl);
-        return "redirect:/memo";
-    }
-
     @GetMapping(value = "/memo/{id}")
     public String getMemo(@PathVariable Long id, Model model) {
         Memo memoImpl = memoService.findById(id);
@@ -44,6 +37,12 @@ public class MemoController {
         model.addAttribute("memos", memos);
         model.addAttribute("memoImpl", memoImpl);
         return "memo-details";
+    }
+
+    @PostMapping(value = "/memo")
+    public String save(@ModelAttribute MemoImpl memoImpl) {
+        memoService.save(memoImpl);
+        return "redirect:/memo";
     }
 
     @PutMapping(value = "/memo")
