@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head th:include="head :: head">
+<body>
+<div class="container">
+    <div class="container-fluid">
+
+        <h3>新建memo</h3>
+        <form action="#" th:action="@{/memo}" th:object="${memoImpl}" method="POST">
+            <div class="row form-group">
+                <input th:field="*{title}" type="text" class="form-control" placeholder="標題"/>
+            </div>
+            <div class="row form-group">
+                <textarea th:field="*{text}" rows="3" class="form-control" style="resize: vertical"
+                          placeholder="內容"></textarea>
+            </div>
+            <input class="btn btn-primary text-right pull-right" type="submit" value="新建"/>
+        </form>
+
+        <h3>memo列表</h3>
+            <ul class="list-group">
+                <li class="list-group-item" th:each="memoImpl:${memos}">
+                    <div class="media">
+                        <div class="media-heading">
+                            <h3><a th:href="@{/memo/{memoId}(memoId=${memoImpl.id})}"
+                                   th:text="${memoImpl.title}">title</a></h3>
+                            <h5 th:text="${memoImpl.text}">title</h5>
+                        </div>
+                        <span th:text="${'創建時間 ' + memoImpl.timestamp}"></span>
+                        <div class="media-right media-middle pull-right">
+                            <form th:method="DELETE" th:action="@{/memo/{memoId}(memoId=${memoImpl.id})}">
+                                <button class="btn btn-danger" type="submit">删除</button>
+                            </form>
+                        </div>
+                        <div class="media-right media-middle pull-right">
+                            <button type="button" class="btn btn-primary editButton" data-toggle="modal"
+                                    th:attr="data-memo-id=${memoImpl.id},
+							data-memo-title=${memoImpl.title},
+		                    data-memo-text=${memoImpl.text}">編輯
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        <div id="memoEditModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">修改</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <form id="editForm" action="#" th:method="PUT" th:object="${memoImpl}">
+                                <input id="memoId" th:field="*{id}" hidden="true" type="text"/>
+                                <div class="row form-group">
+                                    標題：
+                                    <input id="memoTitle" th:field="*{title}" type="text" class="form-control"
+                                           placeholder="標題"/>
+                                </div>
+                                <div class="row form-group">
+                                    正文：
+                                    <textarea id="memoText" th:field="*{text}" class="form-control" rows="5"
+                                              style="resize: vertical" placeholder="內容"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-default" data-dismiss="modal">取消</button>
+                                    <button class="btn btn-primary" type="submit">確認修改</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+<script>
+
+    $(document).ready(function () {
+        $(".editButton").click(function (event) {
+            event.preventDefault();
+            var memoId = $(this).data('memo-id');
+            var memoTitle = $(this).data('memo-title');
+            var memoText = $(this).data('memo-text');
+            $("#memoEditModal").modal();
+
+            $(".modal-body #memoId").val(memoId);
+            $(".modal-body #memoTitle").val(memoTitle);
+            $(".modal-body #memoText").val(memoText);
+            $(".modal-body #editForm").attr('action', "/memo");
+        })
+    });
+</script>
+</html>
