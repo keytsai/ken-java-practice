@@ -8,11 +8,10 @@ import org.springframework.data.repository.CrudRepository;
 import com.ckmates.java.practice2.model.MemoImpl;
 
 public interface MemoRepository extends CrudRepository<MemoImpl, Long> {
-	List<MemoImpl> findAll();
+  List<MemoImpl> findAll();
 
-	Optional<MemoImpl> findById(Long id);
+  Optional<MemoImpl> findById(Long id);
 
-	void deleteById(Long id);
-
+  void deleteById(Long id);
 
 }

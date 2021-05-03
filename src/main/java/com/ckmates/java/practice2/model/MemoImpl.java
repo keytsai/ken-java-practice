@@ -5,61 +5,65 @@ import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "memo")
-public class MemoImpl implements Memo, Serializable {
-	
-	public MemoImpl() {}
+@Entity @Table(name = "memo") public class MemoImpl
+    implements Memo, Serializable {
 
-	@Id
-	@GeneratedValue(strategy= GenerationType.AUTO)
-	private Long id;
-	private String title;
-	private String text;
-	private LocalDateTime timestamp;
-	private String label;
-	private int archived;
-	
-	
-	public LocalDateTime getTimestamp() {
-		return timestamp;
-	}
+  public MemoImpl() {
+  }
 
-	public void setTimestamp(LocalDateTime timestamp) {
-		this.timestamp = timestamp;
-	}
+  @Id @GeneratedValue(strategy = GenerationType.AUTO) private Long id;
+  private String title;
+  private String text;
+  private LocalDateTime timestamp;
+  private String label;
+  private int archived;
 
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getText() {
-		return text;
-	}
-	public void setText(String text) {
-		this.text = text;
-	}
-	public String getLabel() {
-		return label;
-	}
-	public void setLabel(String label) {
-		this.label = label;
-	}
-	public int getArchived() {
-		return archived;
-	}
-	public void setArchived(int archived) {
-		this.archived = archived;
-	}
-	
-	
+  public LocalDateTime getTimestamp() {
+    return timestamp;
+  }
+
+  public void setTimestamp(LocalDateTime timestamp) {
+    this.timestamp = timestamp;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public String getText() {
+    return text;
+  }
+
+  public void setText(String text) {
+    this.text = text;
+  }
+
+  public String getLabel() {
+    return label;
+  }
+
+  public void setLabel(String label) {
+    this.label = label;
+  }
+
+  public int getArchived() {
+    return archived;
+  }
+
+  public void setArchived(int archived) {
+    this.archived = archived;
+  }
 
 }

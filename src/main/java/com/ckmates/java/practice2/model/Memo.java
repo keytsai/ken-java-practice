@@ -28,8 +28,8 @@ public interface Memo {
 
   LocalDateTime getTimestamp();
 
-//  Set<String> getLabels();
+  //  Set<String> getLabels();
 
-//  boolean isArchived();
+  //  boolean isArchived();
 
 }
