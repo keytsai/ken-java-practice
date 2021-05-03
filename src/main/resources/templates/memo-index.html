@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
 <head th:include="head :: head">
 <body>
 <div class="container">
     <div class="container-fluid">
 
-        <h3>新建memo</h3>
+        <h3>新建Memo</h3>
         <form action="#" th:action="@{/memo}" th:object="${memoImpl}" method="POST">
             <div class="row form-group">
                 <input th:field="*{title}" type="text" class="form-control" placeholder="標題"/>
@@ -18,7 +17,7 @@
             <input class="btn btn-primary text-right pull-right" type="submit" value="新建"/>
         </form>
 
-        <h3>memo列表</h3>
+        <h3>Memo列表</h3>
             <ul class="list-group">
                 <li class="list-group-item" th:each="memoImpl:${memos}">
                     <div class="media">
@@ -62,7 +61,7 @@
                                            placeholder="標題"/>
                                 </div>
                                 <div class="row form-group">
-                                    正文：
+                                    內容：
                                     <textarea id="memoText" th:field="*{text}" class="form-control" rows="5"
                                               style="resize: vertical" placeholder="內容"></textarea>
                                 </div>
@@ -85,9 +84,9 @@
     $(document).ready(function () {
         $(".editButton").click(function (event) {
             event.preventDefault();
-            var memoId = $(this).data('memo-id');
-            var memoTitle = $(this).data('memo-title');
-            var memoText = $(this).data('memo-text');
+            let memoId = $(this).data('memo-id');
+            let memoTitle = $(this).data('memo-title');
+            let memoText = $(this).data('memo-text');
             $("#memoEditModal").modal();
 
             $(".modal-body #memoId").val(memoId);
