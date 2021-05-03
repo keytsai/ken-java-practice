@@ -1,23 +1,19 @@
 package com.ckmates.java.practice2.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class MemoImpl implements Memo{
+@Table(name = "memo")
+public class MemoImpl implements Memo, Serializable {
 	
 	public MemoImpl() {}
-	
-	
-	
+
 	@Id
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	private Long id;
-	
 	private String title;
 	private String text;
 	private LocalDateTime timestamp;

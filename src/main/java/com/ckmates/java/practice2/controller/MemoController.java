@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ckmates.java.practice2.model.Memo;
 import com.ckmates.java.practice2.model.MemoImpl;
@@ -21,63 +20,41 @@ import com.ckmates.java.practice2.service.MemoService;
 @Controller
 public class MemoController {
 
-	@Autowired
+    @Autowired
     private MemoService memoService;
-	
-	@GetMapping("/memo")
-	public String index(Model model) {
-		List<MemoImpl> memos = memoService.getAllMemo();
-		model.addAttribute("memos", memos);
-		model.addAttribute("memoImpl", new MemoImpl());
-		model.addAttribute("header", "Memos");
-		model.addAttribute("isAdd", true);
-		
-		return "index";
-	}
-	
-	@PostMapping(value = "/")
-	public String save(@ModelAttribute MemoImpl memoImpl, RedirectAttributes redirectAttributes, Model model) {
-		Memo dbMemoImpl = memoService.save(memoImpl);
-		
-		if(dbMemoImpl != null) {
-			redirectAttributes.addFlashAttribute("successmessage", "Memo is saved successfully");
-            return "redirect:/memo";
-		} else {
-			model.addAttribute("errormessage", "Memo is not save, Please try again");
-            model.addAttribute("memoImpl", memoImpl);
-            return "index";
-		}
-	}
-	
-	@GetMapping(value = "/{id}")
-	public String getMemo(@PathVariable Long id, Model model) {
-		Memo memoImpl = memoService.findById(id);
-		List<MemoImpl> memos = memoService.getAllMemo();
-		model.addAttribute("memos", memos);
-		model.addAttribute("memoImpl", memoImpl);
-		model.addAttribute("header", "Edit Memos");
-		model.addAttribute("isAdd", false);
-		return "index";
-	}
-	
-	@PutMapping(value = "/")
-	public String update(@ModelAttribute MemoImpl memoImpl, RedirectAttributes redirectAttributes, Model model) {
-		Memo dbMemoImpl = memoService.update(memoImpl);
-		
-		if(dbMemoImpl != null) {
-			redirectAttributes.addFlashAttribute("successmessage", "Memo is update successfully");
-            return "redirect:/memo";
-		} else {
-			model.addAttribute("errormessage", "Memo is not update, Please try again");
-            model.addAttribute("memoImpl", memoImpl);
-            return "index";
-		}
-	}
-	
-    @DeleteMapping(value = "/{id}")
-    public String deleteEmployee(@PathVariable Long id, RedirectAttributes redirectAttributes) {
-    	memoService.delete(id);
-        redirectAttributes.addFlashAttribute("successmessage", "Memo is Deleted successfully");
+
+    @GetMapping("/memo")
+    public String index(Model model) {
+        List<MemoImpl> memos = memoService.getAllMemo();
+        model.addAttribute("memos", memos);
+        model.addAttribute("memoImpl", new MemoImpl());
+        return "memo-index";
+    }
+
+    @PostMapping(value = "/memo")
+    public String save(@ModelAttribute MemoImpl memoImpl) {
+        memoService.save(memoImpl);
+        return "redirect:/memo";
+    }
+
+    @GetMapping(value = "/memo/{id}")
+    public String getMemo(@PathVariable Long id, Model model) {
+        Memo memoImpl = memoService.findById(id);
+        List<MemoImpl> memos = memoService.getAllMemo();
+        model.addAttribute("memos", memos);
+        model.addAttribute("memoImpl", memoImpl);
+        return "memo-details";
+    }
+
+    @PutMapping(value = "/memo")
+    public String update(@ModelAttribute MemoImpl memoImpl) {
+        memoService.update(memoImpl);
+        return "redirect:/memo";
+    }
+
+    @DeleteMapping(value = "/memo/{id}")
+    public String deleteEmployee(@PathVariable Long id) {
+        memoService.delete(id);
         return "redirect:/memo";
     }
 
