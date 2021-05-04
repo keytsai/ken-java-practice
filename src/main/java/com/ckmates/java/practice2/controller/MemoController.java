@@ -11,11 +11,14 @@ import com.ckmates.java.practice2.model.Memo;
 import com.ckmates.java.practice2.model.MemoImpl;
 import com.ckmates.java.practice2.service.MemoService;
 
-@Controller public class MemoController {
+@Controller
+public class MemoController {
 
-  @Autowired private MemoService memoService;
+  @Autowired
+  private MemoService memoService;
 
-  @GetMapping("/memo") public String index(Model model) {
+  @GetMapping("/memo")
+  public String index(Model model) {
     List<MemoImpl> memos = memoService.getAllMemo();
     model.addAttribute("memos", memos);
     model.addAttribute("memoImpl", new MemoImpl());

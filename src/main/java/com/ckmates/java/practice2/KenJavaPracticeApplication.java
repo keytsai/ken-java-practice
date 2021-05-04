@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class KenJavaPracticeApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(KenJavaPracticeApplication.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(KenJavaPracticeApplication.class, args);
+  }
 
 }

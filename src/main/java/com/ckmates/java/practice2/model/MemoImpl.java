@@ -5,13 +5,16 @@ import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
-@Entity @Table(name = "memo") public class MemoImpl
-    implements Memo, Serializable {
+@Entity
+@Table(name = "memo")
+public class MemoImpl implements Memo, Serializable {
 
   public MemoImpl() {
   }
 
-  @Id @GeneratedValue(strategy = GenerationType.AUTO) private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long id;
   private String title;
   private String text;
   private LocalDateTime timestamp;
