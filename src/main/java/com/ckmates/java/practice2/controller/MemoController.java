@@ -17,7 +17,7 @@ public class MemoController {
   @Autowired
   private MemoService memoService;
 
-  @GetMapping("/memo")
+  @GetMapping("/memos")
   public String index(Model model) {
     List<MemoImpl> memos = memoService.getAllMemo();
     model.addAttribute("memos", memos);
@@ -25,7 +25,7 @@ public class MemoController {
     return "memo-index";
   }
 
-  @GetMapping(value = "/memo/{id}")
+  @GetMapping("/memos/{id}")
   public String getMemo(@PathVariable Long id, Model model) {
     Memo memoImpl = memoService.findById(id);
     List<MemoImpl> memos = memoService.getAllMemo();
@@ -34,22 +34,22 @@ public class MemoController {
     return "memo-details";
   }
 
-  @PostMapping(value = "/memo")
+  @PostMapping("/memos")
   public String save(@ModelAttribute MemoImpl memoImpl) {
     memoService.save(memoImpl);
-    return "redirect:/memo";
+    return "redirect:/memos";
   }
 
-  @PutMapping(value = "/memo")
+  @PutMapping("/memos")
   public String update(@ModelAttribute MemoImpl memoImpl) {
     memoService.update(memoImpl);
-    return "redirect:/memo";
+    return "redirect:/memos";
   }
 
-  @DeleteMapping(value = "/memo/{id}")
+  @DeleteMapping("/memos/{id}")
   public String deleteEmployee(@PathVariable Long id) {
     memoService.delete(id);
-    return "redirect:/memo";
+    return "redirect:/memos";
   }
 
 }

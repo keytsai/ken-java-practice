@@ -10,6 +10,6 @@ public class IndexController {
 
   @GetMapping
   String index() {
-    return "redirect:/memo";
+    return "redirect:/memos";
   }
 }

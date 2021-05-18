@@ -6,7 +6,7 @@
     <div class="container-fluid">
 
         <h3>新建Memo</h3>
-        <form action="#" th:action="@{/memo}" th:object="${memoImpl}"
+        <form action="#" th:action="@{/memos}" th:object="${memoImpl}"
               method="POST">
             <div class="row form-group">
                 <input th:field="*{title}" type="text" class="form-control"
@@ -16,6 +16,10 @@
                 <textarea th:field="*{text}" rows="3" class="form-control"
                           style="resize: vertical"
                           placeholder="內容"></textarea>
+            </div>
+            <div>
+                <input th:field="*{labels}" type="text" class="form-control"
+                       placeholder="標籤"/>
             </div>
             <input class="btn btn-primary text-right pull-right" type="submit"
                    value="新建"/>
@@ -27,14 +31,15 @@
                 <div class="media">
                     <div class="media-heading">
                         <h3>
-                            <a th:href="@{/memo/{memoId}(memoId=${memoImpl.id})}"
+                            <a th:href="@{/memos/{memoId}(memoId=${memoImpl.id})}"
                                th:text="${memoImpl.title}">title</a></h3>
                         <h5 th:text="${memoImpl.text}">title</h5>
+                        <h6 th:text="${memoImpl.labels}"></h6>
                     </div>
                     <span th:text="${'創建時間 ' + memoImpl.timestamp}"></span>
                     <div class="media-right media-middle pull-right">
                         <form th:method="DELETE"
-                              th:action="@{/memo/{memoId}(memoId=${memoImpl.id})}">
+                              th:action="@{/memos/{memoId}(memoId=${memoImpl.id})}">
                             <button class="btn btn-danger" type="submit">删除
                             </button>
                         </form>
@@ -111,7 +116,7 @@
             $(".modal-body #memoId").val(memoId);
             $(".modal-body #memoTitle").val(memoTitle);
             $(".modal-body #memoText").val(memoText);
-            $(".modal-body #editForm").attr('action', "/memo");
+            $(".modal-body #editForm").attr('action', "/memos");
         })
     });
 </script>
