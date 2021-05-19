@@ -1,16 +1,20 @@
 package com.ckmates.java.practice2.model;
 
-import java.io.Serializable;
+import com.ckmates.java.practice2.controller.form.MemoForm;
+import lombok.Data;
+
 import java.time.LocalDateTime;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table(name = "memo")
-public class MemoImpl implements Memo, Serializable {
+public class MemoImpl implements Memo {
 
-  public MemoImpl() {
-  }
+  public MemoImpl() {}
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,55 +22,10 @@ public class MemoImpl implements Memo, Serializable {
   private String title;
   private String text;
   private LocalDateTime timestamp;
-  private String label;
-  private int archived;
 
-  public LocalDateTime getTimestamp() {
-    return timestamp;
-  }
+  @ElementCollection
+  Set<String> labels = new TreeSet<>();
 
-  public void setTimestamp(LocalDateTime timestamp) {
-    this.timestamp = timestamp;
-  }
-
-  public Long getId() {
-    return id;
-  }
-
-  public void setId(Long id) {
-    this.id = id;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public String getText() {
-    return text;
-  }
-
-  public void setText(String text) {
-    this.text = text;
-  }
-
-  public String getLabel() {
-    return label;
-  }
-
-  public void setLabel(String label) {
-    this.label = label;
-  }
-
-  public int getArchived() {
-    return archived;
-  }
-
-  public void setArchived(int archived) {
-    this.archived = archived;
-  }
+  boolean archived = false;
 
 }

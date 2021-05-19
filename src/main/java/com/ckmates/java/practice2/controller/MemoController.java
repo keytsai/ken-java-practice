@@ -34,6 +34,14 @@ public class MemoController {
     return "memo-details";
   }
 
+  @GetMapping("/memos/archived")
+  public String indexArchived(Model model) {
+    List<MemoImpl> memos = memoService.getAllMemo();
+    model.addAttribute("memos", memos);
+    model.addAttribute("memoImpl", new MemoImpl());
+    return "memo-archived";
+  }
+
   @PostMapping("/memos")
   public String save(@ModelAttribute MemoImpl memoImpl) {
     memoService.save(memoImpl);
@@ -46,10 +54,22 @@ public class MemoController {
     return "redirect:/memos";
   }
 
+  @PutMapping("/memos/archived")
+  public String updateArchived(@ModelAttribute MemoImpl memoImpl) {
+    memoService.update(memoImpl);
+    return "redirect:/memos/archived";
+  }
+
   @DeleteMapping("/memos/{id}")
-  public String deleteEmployee(@PathVariable Long id) {
+  public String delete(@PathVariable Long id) {
     memoService.delete(id);
     return "redirect:/memos";
+  }
+
+  @DeleteMapping("/memos/archived/{id}")
+  public String deleteArchived(@PathVariable Long id) {
+    memoService.delete(id);
+    return "redirect:/memos/archived";
   }
 
 }
