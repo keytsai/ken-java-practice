@@ -77,10 +77,10 @@
                         <button type="button" class="btn btn-primary editButton"
                                 data-toggle="modal"
                                 th:attr="data-memo-id=${memoImpl.id},
-							data-memo-title=${memoImpl.title},
-		                    data-memo-text=${memoImpl.text},
-		                    data-memo-labels=${memoImpl.labels},
-		                    data-memo-archived=${memoImpl.archived}">編輯
+                                data-memo-title=${memoImpl.title},
+                                data-memo-text=${memoImpl.text},
+                                data-memo-labels=${memoImpl.labels},
+                                data-memo-archived=${memoImpl.archived}">編輯
                         </button>
                     </div>
                 </div>
@@ -117,12 +117,14 @@
                                               placeholder="內容"></textarea>
                                 </div>
                                 <div class="row form-group">
-                                    <input id="memoLabels" th:field="*{labels}" type="text" class="form-control"
+                                    <input id="memoLabels" th:field="*{labels}"
+                                           type="text" class="form-control"
                                            placeholder="標籤"/>
                                 </div>
                                 <div class="row form-group">
                                     archived
-                                    <input id="memoArchived" type="checkbox" th:field="*{archived}"
+                                    <input id="memoArchived" type="checkbox"
+                                           th:field="*{archived}"
                                            class="form-control"/>
                                 </div>
                                 <div class="modal-footer">

@@ -11,13 +11,14 @@ import com.ckmates.java.practice2.model.Memo;
 import com.ckmates.java.practice2.model.MemoImpl;
 import com.ckmates.java.practice2.service.MemoService;
 
+@RequestMapping("/memos")
 @Controller
 public class MemoController {
 
   @Autowired
   private MemoService memoService;
 
-  @GetMapping("/memos")
+  @GetMapping
   public String index(Model model) {
     List<MemoImpl> memos = memoService.getAllMemo();
     model.addAttribute("memos", memos);
@@ -25,7 +26,7 @@ public class MemoController {
     return "memo-index";
   }
 
-  @GetMapping("/memos/{id}")
+  @GetMapping("/{id}")
   public String getMemo(@PathVariable Long id, Model model) {
     Memo memoImpl = memoService.findById(id);
     List<MemoImpl> memos = memoService.getAllMemo();
@@ -34,7 +35,7 @@ public class MemoController {
     return "memo-details";
   }
 
-  @GetMapping("/memos/archived")
+  @GetMapping("/archived")
   public String indexArchived(Model model) {
     List<MemoImpl> memos = memoService.getAllMemo();
     model.addAttribute("memos", memos);
@@ -42,31 +43,31 @@ public class MemoController {
     return "memo-archived";
   }
 
-  @PostMapping("/memos")
+  @PostMapping
   public String save(@ModelAttribute MemoImpl memoImpl) {
     memoService.save(memoImpl);
     return "redirect:/memos";
   }
 
-  @PutMapping("/memos")
+  @PutMapping
   public String update(@ModelAttribute MemoImpl memoImpl) {
     memoService.update(memoImpl);
     return "redirect:/memos";
   }
 
-  @PutMapping("/memos/archived")
+  @PutMapping("/archived")
   public String updateArchived(@ModelAttribute MemoImpl memoImpl) {
     memoService.update(memoImpl);
     return "redirect:/memos/archived";
   }
 
-  @DeleteMapping("/memos/{id}")
+  @DeleteMapping("{id}")
   public String delete(@PathVariable Long id) {
     memoService.delete(id);
     return "redirect:/memos";
   }
 
-  @DeleteMapping("/memos/archived/{id}")
+  @DeleteMapping("/archived/{id}")
   public String deleteArchived(@PathVariable Long id) {
     memoService.delete(id);
     return "redirect:/memos/archived";
