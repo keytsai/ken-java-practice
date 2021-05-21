@@ -1,6 +1,5 @@
 package com.ckmates.java.practice2.model;
 
-import com.ckmates.java.practice2.controller.form.MemoForm;
 import lombok.Data;
 
 import java.time.LocalDateTime;

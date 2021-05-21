@@ -17,7 +17,6 @@ package com.ckmates.java.practice2.model;
 
 import java.time.LocalDateTime;
 
-import java.time.LocalDateTime;
 import java.util.Set;
 
 public interface Memo {
