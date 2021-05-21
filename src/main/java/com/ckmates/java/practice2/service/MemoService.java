@@ -1,9 +1,9 @@
 package com.ckmates.java.practice2.service;
 
-import java.util.List;
-
 import com.ckmates.java.practice2.model.Memo;
 import com.ckmates.java.practice2.model.MemoImpl;
+
+import java.util.List;
 
 public interface MemoService {
 

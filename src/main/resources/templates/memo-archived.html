@@ -31,7 +31,7 @@
 
         <h3>Archived Memo列表</h3>
         <ul class="list-group">
-            <li class="list-group-item" th:each="memoImpl:${memos}" th:if="${memoImpl.archived == true}">
+            <li class="list-group-item" th:each="memoImpl:${memoList}" th:if="${memoImpl.archived == true}">
 
                 <div class="media" >
                     <div class="media-heading">

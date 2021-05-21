@@ -1,16 +1,15 @@
 package com.ckmates.java.practice2.service;
 
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-
+import com.ckmates.java.practice2.model.Memo;
+import com.ckmates.java.practice2.model.MemoImpl;
+import com.ckmates.java.practice2.repository.MemoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ckmates.java.practice2.model.Memo;
-import com.ckmates.java.practice2.model.MemoImpl;
-import com.ckmates.java.practice2.repository.MemoRepository;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional

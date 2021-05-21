@@ -2,11 +2,10 @@ package com.ckmates.java.practice2.model;
 
 import lombok.Data;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.TreeSet;
-
-import javax.persistence.*;
 
 @Data
 @Entity
