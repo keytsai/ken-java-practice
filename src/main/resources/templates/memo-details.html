@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org"
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
 <head th:include="head :: head">
 <body>
 <div class="container">
     <div class="media">
         <div class="media-heading">
             <h1 th:text="${memoImpl.title}">title</h1>
-            <h3 th:text="${memoImpl.text}">title</h3>
+            <h3 th:text="${memoImpl.text}">text</h3>
         </div>
         <span th:text="${'創建時間： ' + memoImpl.timestamp}"></span>
     </div>

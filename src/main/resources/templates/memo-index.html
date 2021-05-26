@@ -19,9 +19,12 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/memos">memos <span class="sr-only">(current)</span></a>
+                <li class="active"><a href="/memos">建立新記事本 Create Memo<span class="sr-only">(current)</span></a>
                 </li>
-                <li><a href="/memos/archived">Archived memos</a></li>
+                <li><a href="/memos/archived">收藏記事本列表 Archived Memos</a>
+                </li>
+                <li><a href="/memos/filter">分類搜尋記事本 Search By Category</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -29,21 +32,21 @@
 <div class="container">
     <div class="container-fluid">
 
-        <h3>新建Memo</h3>
+        <h3>建立新記事本 Create Memo</h3>
         <form action="#" th:action="@{/memos}" th:object="${memoImpl}"
               method="POST">
             <div class="row form-group">
                 <input th:field="*{title}" type="text" class="form-control"
-                       placeholder="標題"/>
+                       required placeholder="標題"/>
             </div>
             <div class="row form-group">
                 <textarea th:field="*{text}" rows="3" class="form-control"
                           style="resize: vertical"
-                          placeholder="內容"></textarea>
+                          required placeholder="內容"></textarea>
             </div>
             <div class="row form-group">
                 <input th:field="*{labels}" type="text" class="form-control"
-                       placeholder="標籤"/>
+                       required placeholder="標籤"/>
             </div>
             <div class="row form-group">
                 <input type="checkbox" th:field="*{archived}"
@@ -54,7 +57,7 @@
                    value="新建"/>
         </form>
 
-        <h3>Memo列表</h3>
+        <h3>記事本列表 Memo List</h3>
         <ul class="list-group">
             <li class="list-group-item" th:each="memoImpl:${memoList}">
                 <div class="media">

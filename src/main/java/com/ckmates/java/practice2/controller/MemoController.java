@@ -1,14 +1,24 @@
 package com.ckmates.java.practice2.controller;
 
-import com.ckmates.java.practice2.model.Memo;
-import com.ckmates.java.practice2.model.MemoImpl;
-import com.ckmates.java.practice2.service.MemoService;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.List;
+import com.ckmates.java.practice2.model.Memo;
+import com.ckmates.java.practice2.model.MemoImpl;
+import com.ckmates.java.practice2.service.MemoService;
 
 @RequestMapping("/memos")
 @Controller
@@ -23,7 +33,24 @@ public class MemoController {
     model.addAttribute("memoList", memoList);
     model.addAttribute("memoImpl", new MemoImpl());
     return "memo-index";
+  }
 
+  @GetMapping("/filter")
+  public String indexFilter(Model model) {
+    List<MemoImpl> memoList = memoService.getAllMemo();
+    model.addAttribute("memoList", memoList);
+    model.addAttribute("memoImpl", new MemoImpl());
+    return "memo-filter";
+  }
+
+  @GetMapping("/filtered")
+  public @ResponseBody String filterCondition(Model model,
+      @RequestParam("filterCondition") Set<String> labels) {
+    Set<MemoImpl> memoList = memoService.findByLabeIsIn(labels);
+    model.addAttribute("memoList", memoList);
+    model.addAttribute("memoImpl", new MemoImpl());
+    System.out.println("memoList=" + memoList);
+    return "memo-filter";
   }
 
   @GetMapping("/{id}")

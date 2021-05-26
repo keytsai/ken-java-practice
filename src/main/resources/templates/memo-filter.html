@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns:th="http://www.thymeleaf.org">
+<head th:include="head :: head">
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Memo</a>
+			</div>
+
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="/memos">建立新記事本 Create Memo</a></li>
+					<li><a href="/memos/archived">收藏記事本列表 Archived Memos</a></li>
+					<li><a href="/memos/filter">分類搜尋記事本 Search By Category</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+		<div class="container-fluid">
+
+
+			<h3>記事本列表 Memo List</h3>
+			<ul class="list-group">
+				<li class="list-group-item" th:each="memoImpl:${memoList}">
+					<div class="media">
+						<div class="media-heading">
+							<h5 th:text="${memoImpl.text}">title</h5>
+							<h6 th:text="${memoImpl.labels}"></h6>
+						</div>
+						<span th:text="${'創建時間 ' + memoImpl.timestamp}"></span>
+						<div class="media-right media-middle pull-right">
+							<form th:method="DELETE"
+								th:action="@{/memos/{memoId}(memoId=${memoImpl.id})}">
+								<button class="btn btn-danger" type="submit">删除</button>
+							</form>
+						</div>
+						<div class="media-right media-middle pull-right">
+							<button type="button" class="btn btn-primary editButton"
+								data-toggle="modal"
+								th:attr="data-memo-id=${memoImpl.id},
+                                data-memo-title=${memoImpl.title},
+                                data-memo-text=${memoImpl.text},
+                                data-memo-labels=${memoImpl.labels},
+                                data-memo-archived=${memoImpl.archived}">編輯
+							</button>
+						</div>
+					</div>
+				</li>
+			</ul>
+
+			<div>
+				<form name="filterCondition" id="filterCondition">
+					<div class="form-check" th:each="memoImpl:${memoList}">
+
+						<input class="form-check-input" type="checkbox"
+							id="flexCheckDefault" name="flexCheckDefault"><label
+							class="form-check-label" for="flexCheckDefault"
+							th:text="${memoImpl.labels}"> 標籤過濾條件 </label>
+					</div>
+					<button onclick="filterMemo()">條件搜尋</button>
+				</form>
+			</div>
+
+			<div id="memoEditModal" class="modal fade" tabindex="-1"
+				role="dialog" aria-labelledby="myModalLabel">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">修改</h4>
+						</div>
+						<div class="modal-body">
+							<div class="container-fluid">
+								<form id="editForm" action="#" th:method="PUT"
+									th:object="${memoImpl}">
+									<input id="memoId" th:field="*{id}" hidden="true" type="text" />
+									<div class="row form-group">
+										標題： <input id="memoTitle" th:field="*{title}" type="text"
+											class="form-control" placeholder="標題" />
+									</div>
+									<div class="row form-group">
+										內容：
+										<textarea id="memoText" th:field="*{text}"
+											class="form-control" rows="5" style="resize: vertical"
+											placeholder="內容"></textarea>
+									</div>
+									<div class="row form-group">
+										<input id="memoLabels" th:field="*{labels}" type="text"
+											class="form-control" placeholder="標籤" />
+									</div>
+									<div class="row form-group">
+										archived <input id="memoArchived" type="checkbox"
+											th:field="*{archived}" class="form-control" />
+									</div>
+									<div class="modal-footer">
+										<button class="btn btn-default" data-dismiss="modal">取消
+										</button>
+										<button class="btn btn-primary" type="submit">確認修改</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+<script src="https://code.jquery.com/jquery-2.2.4.js" ></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+	function filterMemo() {
+
+		console.log('filterMemo Initialized')
+		let filterCondition = $('input[name="flexCheckDefault"]:checked').next(
+				"label").text();
+		console.log(filterCondition)
+		$.ajax({
+			url: 'filtered',
+			type : "GET",
+			dataType : JSON.stringify(filterCondition),
+			data : {
+				"filterCondition" : filterCondition,
+			},
+			success : function() {
+				location.reload();
+			},
+			error : function() {
+				window.alert('出現錯誤，請洽管理員');
+				location.reload();
+			}
+		})
+	}
+
+	$(document).ready(function() {
+		$(".editButton").click(function(event) {
+			event.preventDefault();
+			let memoId = $(this).data('memo-id');
+			let memoTitle = $(this).data('memo-title');
+			let memoText = $(this).data('memo-text');
+			let memoLabels = $(this).data('memo-labels');
+			let memoArchived = $(this).data('memo-archived');
+			$("#memoEditModal").modal();
+
+			$(".modal-body #memoId").val(memoId);
+			$(".modal-body #memoTitle").val(memoTitle);
+			$(".modal-body #memoText").val(memoText);
+			$(".modal-body #memoLabels").val(memoLabels);
+			$(".modal-body #memoArchived").val(memoArchived);
+			$(".modal-body #editForm").attr('action', "/memos");
+		})
+	});
+</script>
+</html>

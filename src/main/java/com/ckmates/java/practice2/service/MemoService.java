@@ -1,9 +1,10 @@
 package com.ckmates.java.practice2.service;
 
+import java.util.List;
+import java.util.Set;
+
 import com.ckmates.java.practice2.model.Memo;
 import com.ckmates.java.practice2.model.MemoImpl;
-
-import java.util.List;
 
 public interface MemoService {
 
@@ -12,6 +13,8 @@ public interface MemoService {
   Memo save(MemoImpl memoImpl);
 
   Memo findById(Long id);
+
+  Set<MemoImpl> findByLabeIsIn(Set<String> labels);
 
   Memo update(MemoImpl memoImpl);
 
