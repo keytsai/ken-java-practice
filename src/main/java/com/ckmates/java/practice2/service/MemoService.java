@@ -14,7 +14,7 @@ public interface MemoService {
 
   Memo findById(Long id);
 
-  Set<MemoImpl> findByLabeIsIn(Set<String> labels);
+  Set<MemoImpl> findByLabelsIsIn(Set<String> labels);
 
   Memo update(MemoImpl memoImpl);
 

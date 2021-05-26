@@ -46,7 +46,7 @@ public class MemoController {
   @GetMapping("/filtered")
   public @ResponseBody String filterCondition(Model model,
       @RequestParam("filterCondition") Set<String> labels) {
-    Set<MemoImpl> memoList = memoService.findByLabeIsIn(labels);
+    Set<MemoImpl> memoList = memoService.findByLabelsIsIn(labels);
     model.addAttribute("memoList", memoList);
     model.addAttribute("memoImpl", new MemoImpl());
     System.out.println("memoList=" + memoList);

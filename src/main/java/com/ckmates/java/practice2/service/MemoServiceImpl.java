@@ -38,9 +38,9 @@ public class MemoServiceImpl implements MemoService {
   }
 
   @Override
-  public Set<MemoImpl> findByLabeIsIn(Set<String> labels) {
+  public Set<MemoImpl> findByLabelsIsIn(Set<String> labels) {
     System.out.println("Labels =" + labels);
-    Set<MemoImpl> memoImpl = memoRepository.findByLabeIsIn(labels);
+    Set<MemoImpl> memoImpl = memoRepository.findByLabelsIsIn(labels);
     return memoImpl;
   }
 

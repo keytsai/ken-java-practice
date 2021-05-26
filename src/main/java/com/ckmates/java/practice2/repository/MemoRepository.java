@@ -14,7 +14,7 @@ public interface MemoRepository extends JpaRepository<MemoImpl, Long> {
   List<MemoImpl> findAll();
 
   @Query("from MemoImpl t where t.labels =:label")
-  Set<MemoImpl> findByLabeIsIn(Set<String> label);
+  Set<MemoImpl> findByLabelsIsIn(Set<String> label);
 
   Optional<MemoImpl> findById(Long id);
 
